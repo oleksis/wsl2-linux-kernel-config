@@ -14,10 +14,10 @@ set -e
 
 mkdir -p linux
 pushd linux
-
 linux_json="$(curl -s https://api.github.com/repos/torvalds/linux/tags | jq -r '.[0]')"
 linux_name="$(echo $linux_json | jq -r '.name')"
 
+rm -rf ./torvalds-linux-* v*
 # echo $linux_name | sed 's/$/.tar.gz/' | sed 's#^#https://github.com/torvalds/linux/archive/refs/tags/#' | wget -c -i -
 echo $linux_json | jq -r '.tarball_url' | wget -c -i -
 
