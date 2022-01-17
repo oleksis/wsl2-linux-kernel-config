@@ -26,14 +26,14 @@ if [[ -z $1 ]]; then
 else
 	linux_tag=$1
 	linux_name=linux-$linux_tag
-	linux_url="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/snapshot/$(linux_name)$(file_ext)"
+	linux_url="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/snapshot/${linux_name}${file_ext}"
 fi
 
-file_name="$(linux_name)$(file_ext)"
+file_name="${linux_name}${file_ext}"
 
-curl -L -C - -o $(file_name) $linux_url
+curl -L -C - -o ${file_name} $linux_url
 
-echo -n "Untar $(file_name)..."
+echo -n "Untar ${file_name}..."
 tar -xf "$file_name"
 echo ""
 
