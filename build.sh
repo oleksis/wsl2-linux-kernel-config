@@ -2,29 +2,38 @@
 
 # Requirements for Debian/Ubuntu
 #sudo apt install -y git bc build-essential flex bison libssl-dev libelf-dev dwarves
-#sudo apt install -y curl jq
+#sudo apt install -y curl jq wget
 
 # Requirements for openSUSE
 #sudo zypper in -y -t pattern devel_basis
 #sudo zypper in -y bc openssl openssl-devel dwarves rpm-build libelf-devel
-#sudo zypper in -y curl jq
+#sudo zypper in -y curl jq wget
 
 # Fail on errors.
 set -e
 
 mkdir -p linux
 pushd linux
-linux_json="$(curl -s https://api.github.com/repos/torvalds/linux/tags | jq -r '.[0]')"
-linux_name="$(echo $linux_json | jq -r '.name')"
+rm -rf *linux-* v*
 
-rm -rf ./torvalds-linux-* v*
-# echo $linux_name | sed 's/$/.tar.gz/' | sed 's#^#https://github.com/torvalds/linux/archive/refs/tags/#' | wget -c -i -
-echo $linux_json | jq -r '.tarball_url' | wget -c -i -
+if [[ -z $1 ]]; then
+	linux_json="$(curl -s https://api.github.com/repos/torvalds/linux/tags | jq -r '.[0]')"
+	linux_name="$(echo $linux_json | jq -r '.name')"
+	# echo $linux_name | sed 's/$/.tar.gz/' | sed 's#^#https://github.com/torvalds/linux/archive/refs/tags/#' | wget -c -i -
+	linux_url="$(echo $linux_json | jq -r '.tarball_url')"
+else
+	linux_tag=$1
+	linux_name=linux-$linux_tag.tar.gz
+	linux_url="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/snapshot/$linux_name"
+fi
+
+curl -L -C - -o $linux_name $linux_url
 
 echo -n "Untar $linux_name..."
 tar -xf "$linux_name"
 echo ""
 
+# find -maxdepth 1 -type d -name '*linux-*'
 cd "$(find -maxdepth 1 -type d -regex '\.\/.*linux-.*')"
 
 echo -n "Copy custom default config..."
