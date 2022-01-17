@@ -16,6 +16,8 @@ mkdir -p linux
 pushd linux
 rm -rf *linux-* v*
 
+file_ext=".tar.gz"
+
 if [[ -z $1 ]]; then
 	linux_json="$(curl -s https://api.github.com/repos/torvalds/linux/tags | jq -r '.[0]')"
 	linux_name="$(echo $linux_json | jq -r '.name')"
@@ -23,14 +25,16 @@ if [[ -z $1 ]]; then
 	linux_url="$(echo $linux_json | jq -r '.tarball_url')"
 else
 	linux_tag=$1
-	linux_name=linux-$linux_tag.tar.gz
-	linux_url="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/snapshot/$linux_name"
+	linux_name=linux-$linux_tag
+	linux_url="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/snapshot/$(linux_name)$(file_ext)"
 fi
 
-curl -L -C - -o $linux_name $linux_url
+file_name="$(linux_name)$(file_ext)"
 
-echo -n "Untar $linux_name..."
-tar -xf "$linux_name"
+curl -L -C - -o $(file_name) $linux_url
+
+echo -n "Untar $(file_name)..."
+tar -xf "$file_name"
 echo ""
 
 # find -maxdepth 1 -type d -name '*linux-*'
