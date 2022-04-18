@@ -2,3 +2,4 @@ v*
 linux/
 *.swp
 *.*~
+.venv
