@@ -5,6 +5,10 @@ Merge the last [linux kernel configuration from Microsoft for Windows Subsystem 
 Steps for compile Kernel Linux 5.15.0.
 Can use the script `build.sh` to automate the download, configuration, and compilation of the kernel source code for WSL2
 
+## Video Youtube
+[![Compile Linux Kernel in Windows Subsystem for Linux 2](https://img.youtube.com/vi/4QSsyZsQMqE/mqdefault.jpg)](https://youtu.be/4QSsyZsQMqE)
+
+
 ## Actual Kernel
 ```bash
 uname -a
