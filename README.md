@@ -41,7 +41,7 @@ tar -xf v5.15.tar.gz
 wget https://github.com/microsoft/WSL2-Linux-Kernel/raw/linux-msft-wsl-5.10.y/Microsoft/config-wsl
 ```
 
-## Copy config WSL as default donfig to the linux configs
+## Copy config WSL as default config to the linux config dir
 ```bash
 cp config-wsl linux-5.15/arch/x86/configs/wsl_defconfig
 ```
