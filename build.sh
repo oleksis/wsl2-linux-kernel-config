@@ -11,6 +11,10 @@
 #sudo zypper in -y bc openssl openssl-devel dwarves rpm-build libelf-devel
 #sudo zypper in -y curl jq wget
 
+# Requirements for Windows
+# Windows Powershell CLI
+# %SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe
+
 # Fail on errors.
 set -e
 
