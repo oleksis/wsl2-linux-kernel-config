@@ -3,3 +3,4 @@ linux/
 *.swp
 *.*~
 .venv
+build-git.sh

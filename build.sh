@@ -1,6 +1,6 @@
 #!/bin/bash
-# Step by Step Guide: How to quickly build a Linux kernel
-# https://www.leemhuis.info/files/misc/How%20to%20quickly%20build%20a%20Linux%20kernel%20%E2%80%94%20The%20Linux%20Kernel%20documentation.html
+# Step by Step Guide: How to quickly build a trimmed Linux kernel
+# https://www.leemhuis.info/files/misc/How%20to%20quickly%20build%20a%20trimmed%20Linux%20kernel%20%E2%80%94%20The%20Linux%20Kernel%20documentation.html
 
 # Requirements for Debian/Ubuntu
 #sudo apt install -y git bc build-essential flex bison libssl-dev libelf-dev dwarves
