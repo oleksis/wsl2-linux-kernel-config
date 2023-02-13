@@ -5,7 +5,6 @@
 # Requirements for Debian/Ubuntu
 #sudo apt install -y git bc build-essential flex bison openssl libssl-dev libelf-dev dwarves
 #sudo apt install -y binutils gcc make pahole perl-base
-#sudo apt install -y curl jq wget
 
 # [Install build requirements](https://www.leemhuis.info/files/misc/How%20to%20quickly%20build%20a%20trimmed%20Linux%20kernel%20%E2%80%94%20The%20Linux%20Kernel%20documentation.html#install-build-requirements)
 
@@ -18,28 +17,23 @@ set -e
 
 mkdir -p linux
 pushd linux
-#rm -rf *linux-* v*
 
-if [[ -z $1 ]]; then
-	linux_json="$(curl -s https://api.github.com/repos/torvalds/linux/tags | jq -r '.[0]')"
-	linux_version="$(echo $linux_json | jq -r '.name')"
-	linux_url="https://github.com/torvalds/linux.git"
-else
-	linux_tag=$1
-	linux_version=linux-$linux_tag
+linux_url="https://github.com/torvalds/linux.git"
+
+if [ "$1" == "kernel" ]; then
 	linux_url="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
 fi
+
+echo -n "Housekeeping..."
+rm -rf ./build
+echo ""
 
 if [[ ! -d ./sources ]]; then
 	mkdir -p ./sources ./build
 	echo "Clonning kernel..."
 	git clone --depth 1 -b master ${linux_url} ./sources
-	echo ""
 	cd sources/
 else
-	echo -n "Housekeeping..."
-	rm -rf ./build
-	echo ""
 	mkdir ./build
 	cd sources/
 	echo "Feching kernel..."
@@ -52,6 +46,8 @@ fi
 #
 # ➜ du -hs torvalds-linux-53b3c64/
 # 5.5G    torvalds-linux-53b3c64/
+
+linux_version=v$(make -s kernelversion)
 
 echo -n "Copy custom default config..."
 cp -f ../../Microsoft/config-wsl ../build/.config
