@@ -37,7 +37,7 @@ else
 	mkdir ./build
 	cd sources/
 	echo "Feching kernel..."
-	git fetch --shallow-since='2 weeks'
+	git fetch --depth 1
 	git checkout --force --detach origin/master
 fi
 
