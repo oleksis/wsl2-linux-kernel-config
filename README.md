@@ -1,8 +1,8 @@
 # Custom Linux/x86 Kernel Configuration
-Merge the last [linux kernel configuration from Microsoft for Windows Subsystem for Linux 2](https://raw.githubusercontent.com/microsoft/WSL2-Linux-Kernel/linux-msft-wsl-5.15.y/Microsoft/config-wsl) with the [upstream torvalds linux sources](https://github.com/torvalds/linux/)
+Merge the last [linux kernel configuration from Microsoft for Windows Subsystem for Linux 2](https://github.com/microsoft/WSL2-Linux-Kernel/blob/linux-msft-wsl-6.1.y/Microsoft/config-wsl) with the [upstream torvalds linux sources](https://github.com/torvalds/linux/)
 
 ## Compile Mainline Kernel for WSL2
-Steps for compile Kernel Linux 5.15.y.
+Steps for compile [Kernel Linux 6.1.y](https://github.com/microsoft/WSL2-Linux-Kernel/tree/linux-msft-wsl-6.1.y).
 Can use the script `build.sh` to automate the download, configuration, and compilation of the kernel source code for WSL2
 
 ## Video Youtube
