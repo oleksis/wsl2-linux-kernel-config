@@ -66,3 +66,7 @@ powershell.exe /C 'Copy-Item -Force ..\build\arch\x86\boot\bzImage $env:USERPROF
 powershell.exe /C 'Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage-'$linux_version' | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII'
 
 popd
+
+# Install kernel modules (Optional)
+sudo make modules_install install O=../build/
+cat /lib/modules/6.3.0-oleksis-microsoft-standard-WSL2+/modules.builtin
